@@ -1,5 +1,5 @@
-import { CategoryRepository } from '../repositories/CategoryRepository'
-import { ICategoriesRepository } from '../repositories/ICategoriesRepository'
+import { CategoryRepository } from '../../repositories/CategoryRepository'
+import { ICategoriesRepository } from '../../repositories/implementations/ICategoriesRepository'
 
 interface IRequest {
   name: string
@@ -10,7 +10,7 @@ interface IRequest {
  *  []  - Definir o tipo de retorno,
  *  [x]  - Altrerar o retorno de erro
  */
-class CreateCategoryServices {
+class CreateCategoryUseCase {
   constructor(private categoriesRepository: ICategoriesRepository) {}
 
   execute({ name, description }: IRequest): void {
@@ -24,4 +24,4 @@ class CreateCategoryServices {
   }
 }
 
-export { CreateCategoryServices }
+export { CreateCategoryUseCase }
