@@ -14,7 +14,6 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 
   async create({ description, name }: ICretaeCategoryDTO): Promise<void> {
-   console.log(description , name);
     const category = this.repository.create({
       description,
       name,
