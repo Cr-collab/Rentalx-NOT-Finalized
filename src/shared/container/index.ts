@@ -8,6 +8,8 @@ import { IUsersRepository } from '../../modules/accounts/repositories/implementa
 import { ICategoriesRepository } from '../../modules/cars/repositories/implementations/ICategoriesRepository'
 import { ISpecifactionRepository } from '../../modules/cars/repositories/implementations/ISpecifactionRepository'
 
+import 'reflect-metadata'
+
 //criando um container
 container.registerSingleton<ICategoriesRepository>(
   'CategoriesRepository',
