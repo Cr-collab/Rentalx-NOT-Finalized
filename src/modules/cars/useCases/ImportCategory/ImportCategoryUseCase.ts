@@ -1,4 +1,4 @@
-import { CategoriesRepository } from '../../repositories/CategoriesRepository'
+import { CategoriesRepository } from '@modules/cars/repositories/CategoriesRepository'
 import fs from 'fs'
 import { parse } from 'csv-parse'
 import { inject, injectable } from 'tsyringe'
@@ -11,8 +11,9 @@ interface IImportCategory {
 @injectable()
 class ImportCategoryUseCase {
   constructor(
-    @inject("CategoriesRepository")
-    private categoriesRepository: CategoriesRepository) { }
+    @inject('CategoriesRepository')
+    private categoriesRepository: CategoriesRepository,
+  ) {}
   loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
     return new Promise((resolve, reject) => {
       const stream = fs.createReadStream(file.path)
@@ -48,8 +49,6 @@ class ImportCategoryUseCase {
       const categoryAlreadyExists = await this.categoriesRepository.findByName(
         category.name,
       )
-
-
 
       if (!categoryAlreadyExists) {
         await this.categoriesRepository.create(category)

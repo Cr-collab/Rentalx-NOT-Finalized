@@ -1,14 +1,14 @@
-import { Category } from '../../entities/Category'
+import { Category } from '@modules/cars/entities/Category'
 import {
   ICategoriesRepository,
-  ICretaeCategoryDTO
-} from '../implementations/ICategoriesRepository'
+  ICretaeCategoryDTO,
+} from '@modules/cars/repositories/implementations/ICategoriesRepository'
 
 class CategoriesRepositoryInMemory implements ICategoriesRepository {
   categories: Category[] = []
 
   async findByName(name: string): Promise<Category | undefined> {
-    const category = this.categories.find(category => category.name === name)
+    const category = this.categories.find((category) => category.name === name)
     return category
   }
   async list(): Promise<Category[]> {
@@ -20,7 +20,7 @@ class CategoriesRepositoryInMemory implements ICategoriesRepository {
 
     Object.assign(category, {
       name,
-      description
+      description,
     })
 
     this.categories.push(category)

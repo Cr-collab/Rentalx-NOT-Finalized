@@ -1,5 +1,5 @@
-import { AppError } from '../../../../errors/AppError'
-import { CategoriesRepositoryInMemory } from '../../repositories/in-memory/CategoriesRepositoryInMemory'
+import { AppError } from '@errors/AppError'
+import { CategoriesRepositoryInMemory } from '@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory'
 import { CreateCategoryUseCase } from './CreateCategoryUseCase'
 
 let createCategoryUseCase: CreateCategoryUseCase
@@ -9,22 +9,22 @@ describe('Create Category', () => {
   beforeAll(() => {
     categoriesRepositoryInMemory = new CategoriesRepositoryInMemory()
     createCategoryUseCase = new CreateCategoryUseCase(
-      categoriesRepositoryInMemory
+      categoriesRepositoryInMemory,
     )
   })
 
   it('shouls be able to create a new category', async () => {
     const category = {
       name: 'Category test',
-      description: 'Category description test'
+      description: 'Category description test',
     }
     await createCategoryUseCase.execute({
       name: category.name,
-      description: category.description
+      description: category.description,
     })
 
     const categoryCreated = await categoriesRepositoryInMemory.findByName(
-      category.name
+      category.name,
     )
 
     console.log(categoryCreated)
@@ -35,17 +35,17 @@ describe('Create Category', () => {
     expect(async () => {
       const category = {
         name: 'Category Test',
-        description: 'Category description Test'
+        description: 'Category description Test',
       }
 
       await createCategoryUseCase.execute({
         name: category.name,
-        description: category.description
+        description: category.description,
       })
 
       await createCategoryUseCase.execute({
         name: category.name,
-        description: category.description
+        description: category.description,
       })
     }).rejects.toBeInstanceOf(AppError)
   })

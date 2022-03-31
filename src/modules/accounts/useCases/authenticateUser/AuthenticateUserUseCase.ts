@@ -1,8 +1,8 @@
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '../../../../errors/AppError'
-import { IUsersRepository } from '../../repositories/implementations/IUsersRepository'
+import { AppError } from '@errors/AppError'
+import { IUsersRepository } from '@modules/accounts/repositories/implementations/IUsersRepository'
 
 interface IRequest {
   email: string
@@ -21,7 +21,7 @@ interface IResponse {
 class AuthenticateUserUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
@@ -40,15 +40,15 @@ class AuthenticateUserUseCase {
     // Gerar o json web token
     const token = sign({}, '2cff735a4674d99f396fede105f6eb85', {
       subject: user.id,
-      expiresIn: '1d'
+      expiresIn: '1d',
     })
 
     const tokenReturn: IResponse = {
       token,
       user: {
         name: user.name,
-        email: user.email
-      }
+        email: user.email,
+      },
     }
 
     return tokenReturn

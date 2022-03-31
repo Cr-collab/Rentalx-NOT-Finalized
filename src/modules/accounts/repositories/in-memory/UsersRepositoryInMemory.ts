@@ -1,6 +1,6 @@
-import { ICreateUsersDTO } from 'src/modules/accounts/dtos/ICreateUserDTO'
-import { User } from '../../entities/User'
-import { IUsersRepository } from 'src/modules/accounts/repositories/implementations/IUsersRepository'
+import { ICreateUsersDTO } from '@modules/accounts/dtos/ICreateUserDTO'
+import { User } from '@modules/accounts/entities/User'
+import { IUsersRepository } from '@modules/accounts/repositories/implementations/IUsersRepository'
 
 class UsersRepositoryInMemory implements IUsersRepository {
   repository: User[] = []
@@ -9,7 +9,7 @@ class UsersRepositoryInMemory implements IUsersRepository {
     driver_license,
     email,
     password,
-    name
+    name,
   }: ICreateUsersDTO): Promise<void> {
     const user = new User()
 
@@ -17,17 +17,17 @@ class UsersRepositoryInMemory implements IUsersRepository {
       driver_license,
       email,
       name,
-      password
+      password,
     })
 
     this.repository.push(user)
   }
   async findByEmail(email: string): Promise<User | undefined> {
-    const user = this.repository.find(user => user.email === email)
+    const user = this.repository.find((user) => user.email === email)
     return user
   }
   async findById(id: string): Promise<User | undefined> {
-    return this.repository.find(user => user.id === id)
+    return this.repository.find((user) => user.id === id)
   }
 }
 
