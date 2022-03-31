@@ -3,12 +3,13 @@ import { ICreateUsersDTO } from '../../dtos/ICreateUserDTO'
 import { UsersRepository } from '../../repositories/UsersRepository'
 import { hash } from 'bcryptjs'
 import { AppError } from '../../../../errors/AppError'
+import { UsersRepositoryInMemory } from '../../repositories/in-memory/UsersRepositoryInMemory'
 
 @injectable()
 class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: UsersRepository
+    private usersRepository: UsersRepository | UsersRepositoryInMemory
   ) {}
 
   async execute({
