@@ -1,4 +1,4 @@
-**_ Requisitos funcionais _**
+<!-- **_ Requisitos funcionais _**
 São as funcionalidade da nosso aplicação.
 
 **_ Requisitos não funcionais _**
@@ -8,7 +8,7 @@ por exemplo os dados devem ser salvo no banco de dados postgres.
 **_ Regra de Negocios _**
 Regras baseado nas requisitos funcinais
 
----
+--- -->
 
 # Cadastro de carros
 
