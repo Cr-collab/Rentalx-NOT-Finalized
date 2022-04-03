@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
-import { AppError } from '../errors/AppError'
-import { UsersRepository } from '../modules/accounts/repositories/UsersRepository'
+import { AppError } from '../../../errors/AppError'
+import { UsersRepository } from '../../../../modules/accounts/infra/typeorm/repositories/UsersRepository'
 
 interface IPayload {
   sub: string
@@ -10,7 +10,7 @@ interface IPayload {
 export async function ensureAuthenticated(
   request: Request,
   response: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> {
   const authHeader = request.headers.authorization
 
@@ -23,7 +23,7 @@ export async function ensureAuthenticated(
   try {
     const { sub: user_id } = verify(
       token,
-      '2cff735a4674d99f396fede105f6eb85'
+      '2cff735a4674d99f396fede105f6eb85',
     ) as IPayload
 
     const usersRepository = new UsersRepository()
@@ -34,7 +34,7 @@ export async function ensureAuthenticated(
       throw new AppError('User does exists', 401)
     }
     request.user = {
-      id: user_id
+      id: user_id,
     }
     next()
   } catch {

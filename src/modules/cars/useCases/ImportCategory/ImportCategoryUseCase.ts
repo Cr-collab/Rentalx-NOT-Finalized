@@ -1,4 +1,4 @@
-import { CategoriesRepository } from '@modules/cars/repositories/CategoriesRepository'
+import { CategoriesRepository } from '@modules/cars/infra/typeorm/repositories/CategoriesRepository'
 import fs from 'fs'
 import { parse } from 'csv-parse'
 import { inject, injectable } from 'tsyringe'
