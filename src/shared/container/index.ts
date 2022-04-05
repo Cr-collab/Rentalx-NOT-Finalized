@@ -9,6 +9,8 @@ import { ICategoriesRepository } from '../../modules/cars/repositories/ICategori
 import { ISpecifactionRepository } from '../../modules/cars/repositories/ISpecifactionRepository'
 
 import 'reflect-metadata'
+import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository'
+import { CarsRepository } from '@modules/cars/infra/typeorm/repositories/CarsRepository'
 
 //criando um container
 container.registerSingleton<ICategoriesRepository>(
@@ -25,3 +27,5 @@ container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
 )
+
+container.registerSingleton<ICarsRepository>('CarsRepository', CarsRepository)
