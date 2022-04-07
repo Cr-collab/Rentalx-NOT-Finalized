@@ -6,9 +6,10 @@ import swaggerFile from '../../../swagger.json'
 import 'reflect-metadata'
 
 import '../../container'
-import '../typeorm'
 import { AppError } from '../../errors/AppError'
+import  createConnection from  '../typeorm'
 
+createConnection()
 const app = express()
 
 app.use(express.json())
