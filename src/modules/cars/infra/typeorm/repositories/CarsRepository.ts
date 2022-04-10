@@ -11,6 +11,7 @@ class CarsRepository implements ICarsRepository {
     this.repository = getRepository(Car)
   }
 
+
   async create({
     name,
     description,
@@ -38,6 +39,14 @@ class CarsRepository implements ICarsRepository {
     const car = await this.repository.findOne({ license_plate })
     return car
   }
+
+
+  list(): Promise<Car[] | undefined> {
+    const cars = this.repository.find()
+    return cars
+  }
+
+
 }
 
 export { CarsRepository }
