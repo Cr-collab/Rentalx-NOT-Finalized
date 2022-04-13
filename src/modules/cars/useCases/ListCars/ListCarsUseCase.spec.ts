@@ -38,4 +38,36 @@ describe("List Category", () => {
 
     expect(cars).toContainEqual(carCreate)
   })
+
+  it("should be able to list all available cars by brand ", async () => {
+    const carCreate = await carsRepositoryInMemory.create({
+      name: "Audi A2",
+      description: "Carro com espaço",
+      dayly_rate: 240.0,
+      license_plate: "CDE-456",
+      fine_amount: 100,
+      brand: "Audi2",
+      category_id: "27d60abd-20aa-4ce7-a522-6581eb92aacd"
+    })
+
+    const cars = await listCarsUseCase.execute({ brand: "Audi2" })
+
+    expect(cars).toContainEqual(carCreate)
+  })
+
+  it("should be able to list all available cars by category ", async () => {
+    const carCreate = await carsRepositoryInMemory.create({
+      name: "Audi A2",
+      description: "Carro com espaço",
+      dayly_rate: 240.0,
+      license_plate: "CDE-456",
+      fine_amount: 100,
+      brand: "Audi2",
+      category_id: "27d60abd-20aa-4ce7-a522-6581eb92aacd"
+    })
+
+    const cars = await listCarsUseCase.execute({ category_id: "27d60abd-20aa-4ce7-a522-6581eb92aacd" })
+
+    expect(cars).toContainEqual(carCreate)
+  })
 })
