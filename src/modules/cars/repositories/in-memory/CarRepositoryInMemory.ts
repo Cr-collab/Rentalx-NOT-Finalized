@@ -4,7 +4,9 @@ import { ICarsRepository } from '../ICarsRepository'
 
 class CarRepositoryInMemory implements ICarsRepository {
 
+
   cars: Car[] = []
+
   async create({
     name,
     description,
@@ -13,6 +15,7 @@ class CarRepositoryInMemory implements ICarsRepository {
     dayly_rate,
     fine_amount,
     license_plate,
+    id
   }: ICreateCarDTO): Promise<Car> {
     const car = new Car()
 
@@ -24,6 +27,7 @@ class CarRepositoryInMemory implements ICarsRepository {
       dayly_rate,
       fine_amount,
       license_plate,
+      id
     })
 
     this.cars.push(car)
@@ -47,6 +51,13 @@ class CarRepositoryInMemory implements ICarsRepository {
 
     return carsAvailable
   }
+
+  async findById(car_id: string): Promise<Car | undefined> {
+    const carsExists = this.cars.find(car => car.id === car_id);
+
+    return carsExists
+  }
+
 }
 
 export { CarRepositoryInMemory }

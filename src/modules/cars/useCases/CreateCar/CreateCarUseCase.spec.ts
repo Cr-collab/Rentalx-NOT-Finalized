@@ -60,7 +60,6 @@ describe('Create Car', () => {
       fine_amount: 60,
     })
 
-    console.log(car)
     expect(car.available).toEqual(true)
   })
 })
